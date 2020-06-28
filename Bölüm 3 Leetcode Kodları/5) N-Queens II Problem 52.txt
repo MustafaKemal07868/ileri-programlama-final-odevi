@@ -1,0 +1,63 @@
+var totalNQueens = function(n) {
+    let arr = new Array(n)
+    for (let inx = 0; inx < n; ++inx){
+        arr[inx] = new Array(n)
+        arr[inx].fill('.')
+    }
+    let sum = 0
+    function searchCanidates(arr, n, jnx){
+        let ret = []
+        for (let i = 0; i < n; ++i){
+            let j = 0;
+            for (; j < jnx; ++j){
+                if (arr[i][j] == 'Q'){
+                    break
+                }
+            }
+            if (j == jnx){
+                let tmpi = i - 1, tmpj = jnx - 1
+                while(tmpi >= 0 && tmpj >= 0){
+                    if (arr[tmpi][tmpj] == 'Q'){
+                        break
+                    }
+                    else{
+                        --tmpj;
+                        --tmpi;
+                    }
+                }
+                if (tmpi < 0 || tmpj < 0){
+                    tmpi = i + 1, tmpj = jnx - 1
+                    while(tmpi < n && tmpj >= 0){
+                        if (arr[tmpi][tmpj] == 'Q'){
+                            break
+                        }
+                        else{
+                            --tmpj;
+                            ++tmpi;
+                        }
+                    }
+                    if (tmpi >= n || tmpj < 0){
+                        ret.push(i)
+                    }
+                }
+            }
+        }
+        return ret
+    }
+    function dfs(inx, n, arr){
+        if (inx == n){
+            ++sum
+            return
+        }
+        // find canidate positions
+        let candidates = searchCanidates(arr, n, inx)
+        for (let i = 0; i < candidates.length; ++i){
+            let row = candidates[i]
+            arr[row][inx] = 'Q'
+            dfs(inx + 1, n, arr)
+            arr[row][inx] = '.'
+        }
+    }
+    dfs(0, n, arr)
+    return sum
+};
