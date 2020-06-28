@@ -1,0 +1,20 @@
+function namesScores(arr) {    // fonksiyon oluşturulur
+  arr.unshift(0)   //  diziye karakterler eklenir
+  arr = arr.sort()   //  dizi sıralanır
+
+  function nameScoreCalc(word, i){
+    let sum = 0    // toplam sıfır alınır
+    let score;   //  skor tanımlanır
+    let alpha = [" ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]   // alfabe tanıtılır
+    for (let i = 0 ; i < word.length; i++){    // for döngüsü oluşturulur
+        sum+= alpha.indexOf(word[i].toLowerCase())    // toplam kelimenin sırası ve harf değeri çarpımı ile bulunur
+    }
+	  return sum*i
+  }
+
+  let total = 0    // toplam 0 alınır
+  for (let i = 0 ; i < arr.length; i++){  // for döngüsü oluşturulur
+    total +=nameScoreCalc(arr[i], i)   //  toplam dizideki kelimenin skoru olur
+  }
+  return total
+}

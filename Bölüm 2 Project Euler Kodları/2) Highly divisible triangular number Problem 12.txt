@@ -1,0 +1,27 @@
+function divisibleTriangleNumber(n) {
+
+  function triCalc(x){
+    return (x*(x+1))/2
+  }
+
+  function calcDivs(num){
+    let divCount = 0 
+      for (let j = 1; j <= num; j++){
+          if (num%j===0){
+            divCount++
+          }
+      }
+      return divCount
+  }
+
+  let i = 1
+  let triVal, totalDivs;
+
+  while (totalDivs <= 500){
+    triVal = triCalc(i)
+      totalDivs = calcDivs(triVal)
+    i++
+  }
+
+  return triVal 
+}

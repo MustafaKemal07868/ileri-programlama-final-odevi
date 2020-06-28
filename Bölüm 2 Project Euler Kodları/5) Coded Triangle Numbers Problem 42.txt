@@ -1,0 +1,26 @@
+const fs = require('fs');
+	const fp = require('lodash/fp');
+	const object = require('lodash/fp/object');
+	const extend = require('lodash/fp/extend');
+	
+
+	let tn = [...Array(100).keys()].map(n=>n*(n+1)/2);
+	
+
+	
+
+	let words; 
+	fs.readFile('p042_words.txt', 'utf8', function(err, data){
+	  if (err) throw err;
+	  words = data.replace(/\"/g,'').split(',');
+	});
+	
+
+	let wordSum = w => w.split('').reduce((a,v)=>a+v.charCodeAt(0)-64,0);
+	
+
+	let ans = 0;
+	for(w of words){
+	  if (tn.indexOf(wordSum(w)) !== -1) ans += 1;
+	}
+ans = 162;
